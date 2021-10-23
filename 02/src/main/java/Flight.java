@@ -17,7 +17,7 @@ public class Flight {
 	private int Fares[]=new int[3];  //stores Economy Class at Index 0, Business Class at Index 1, First Class at Index 2
 	private String Airline_Name;
 	private String Plane_Name;
-	private LinkedList<Passenger> PassengersList=new LinkedList<Passenger>();
+	public LinkedList<Passenger> PassengersList=new LinkedList<Passenger>();
 	
 	
 	
@@ -265,7 +265,7 @@ public class Flight {
 				{
 					this.SeatStatus[i]=true;
 					this.AvailSeats--;
-					System.out.print("\nSEATS BOOKED SUCCESSFULLY\n\n");
+					System.out.print("\nSEAT BOOKED SUCCESSFULLY\n\n");
 					if(PassengersList.contains(P) && PassengersList!=null)
 					{
 						System.out.print("\nPassenger Has Already Booked a Ticket for this Flight\n\n");
@@ -275,6 +275,7 @@ public class Flight {
 					PassengersList.add(P);
 					P.setSeatNum(i);
 					P.setType(Type);
+					System.out.print("\nPAYMENT SUCCESFULLY DONE\n\n");
 					return i;
 				}
 			}
@@ -301,6 +302,7 @@ public class Flight {
 						PassengersList.add(P);
 					P.setSeatNum(i);
 					P.setType(Type);
+					System.out.print("\nPAYMENT SUCCESFULLY DONE\n\n");
 					return i;
 				}
 			}
@@ -328,6 +330,7 @@ public class Flight {
 						PassengersList.add(P);
 					P.setSeatNum(i);
 					P.setType(Type);
+					System.out.print("\nPAYMENT SUCCESFULLY DONE\n\n");
 					return i;
 				}
 			}
@@ -363,7 +366,7 @@ public class Flight {
 	
 	public void printTicket(String PassportNumber)
 	{
-		
+		boolean flag=false;
 		for(int i=0;i<PassengersList.size();i++)
 		{
 			if(PassengersList.get(i).getPassportNum().equals(PassportNumber))
@@ -394,10 +397,15 @@ public class Flight {
 				System.out.print("\nAIRLINE NAME:                     "+this.Airline_Name);
 				System.out.print("\nPLANE NAME:                       "+this.Plane_Name);
 				this.PassengersList.get(i).displayDetails();
+				flag=true;
 				
 			}
-			else
-				System.out.print("\nRECORD NOT FOUND\n\n");
+			
+		}
+		if(!flag)
+		{
+			
+			System.out.print("\nRECORD NOT FOUND\n\n");
 		}
 		
 		

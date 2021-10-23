@@ -29,7 +29,8 @@ public class Driver {
 						+	"\n2) Edit your flight."
 						+	"\n3) Cancel your flight."
 						+	"\n4) Display All Flights."
-						+   "\n5) Exit.\n\n"
+						+   "\n5) Print your Ticket."
+						+   "\n6) Exit.\n\n"
 				
 				
 						);
@@ -56,6 +57,9 @@ public class Driver {
 				Type+=inp.nextLine();
 				//inp.nextLine();
 				String FlightNum="";
+				boolean flag=false;
+				int temp=0;
+				int index=0;
 				for (int i=0;i<FlightsList.size();i++)
 				{
 					
@@ -64,47 +68,90 @@ public class Driver {
 					{
 						
 						FlightsList.get(i).displayFlights();
+						flag=true;
+						temp++;
+						index=i;
 						
 					}
 					
 						
 					
-					else
-						System.out.print("\n NO FLIGHTS AVAILABLE\n\n");
+					
 				}
 				
-				System.out.print("\nPlease Enter the Flight Number of the Flight You want to choose based on the Fares\n\n");
-				FlightNum+=inp.nextLine();
-				
-				for (int i=0;i<FlightsList.size();i++)
+				if(!flag)
 				{
-					if(FlightsList.get(i).getFlightNumber().equals(FlightNum))
-					{
-						FlightsList.get(i).BookTicket(obj, Type);
-						FlightsList.get(i).printTicket(obj.getPassportNum());
-					}
+					System.out.print("\nNO FLIGHTS AVAILABLE\n\n");
 				}
 				
+				if(temp>=2)
+				{
+					System.out.print("\nPlease Enter the Flight Number of the Flight You want to choose based on the Fares\n\n");
+					FlightNum+=inp.nextLine();
+					
+					for (int i=0;i<FlightsList.size();i++)
+					{
+						if(FlightsList.get(i).getFlightNumber().equals(FlightNum))
+						{
+							FlightsList.get(i).BookTicket(obj, Type);
+							
+						}
+					}
+					
+				}
 				
+				else if (temp==1)
+				{
+					FlightsList.get(index).BookTicket(obj, Type);
+					
+				}
 				break;
 			
 			case 2:
-					
+			{
+				String FNum="";
+				String PNum="";
+				//Passenger temp=new Passenger();
+				int Findex=0;
+				int Pindex=0;
+				inp.nextLine();
+				System.out.print("\nPlease Enter your Flight Number\n\n");
+				FNum+=inp.nextLine();
+				System.out.print("\nPlease Enter your Passport Number\n\n");
+				PNum+=inp.nextLine();
+				
+				for (int i=0;i<FlightsList.size();i++)
+				{
+					if(FlightsList.get(i).getFlightNumber().equals(FNum))
+					{
+						Findex=i;
+						for (int j=0;j<FlightsList.get(Findex).PassengersList.size();j++)
+							{
+								if(FlightsList.get(Findex).PassengersList.get(j).equals(PNum))
+								{
+									Pindex=j;
+								}
+							}
+					}
+				}
+				if (Findex==-1 || Pindex==-1)
+					System.out.print("\nInvalid Input\n\n");
+				
 				do {
+					
+					
+					
 				
 				System.out.print(	"\nSelect one from the below options :"
 								+	"\n1. Edit your Name."
 								+	"\n2. Edit your Age."
 								+	"\n3. Edit your Gender."
 								+	"\n4. Edit your Address."
-								+	"\n5. Edit your Passport Number."
-								+	"\n6. Edit your Phone Number."
-								+	"\n7. Edit your Email."
-								+	"\n8. Edit your Card Number."
-								+	"\n9. Edit your CVC Code."
-								+	"\n10. Edit your Expiry Date of the Card."
-								+	"\n11. Display Details."
-								+   "\n12. Exit."
+								+	"\n5. Edit your Phone Number."
+								+	"\n6. Edit your Email."
+								+	"\n7. Edit your Card Number."
+								+	"\n8. Display Details."
+								+   "\n9. Exit."
 								
 								
 								
@@ -119,8 +166,7 @@ public class Driver {
 					 long Phone_Number=0;
 					 String Email="";
 					 long Card_Number=0;
-					 int CVC=0;
-					 String Exp_Date_Card="";
+					
 					 
 					 choice = inp.nextInt();
 					 
@@ -130,9 +176,10 @@ public class Driver {
 					case 1:
 						
 						System.out.print("Enter your Name : ");
-						Name += inp.nextLine();
-						obj.setName(Name);
 						inp.nextLine();
+						Name += inp.nextLine();
+						FlightsList.get(Findex).PassengersList.get(Pindex).setName(Name);
+					//	inp.nextLine();
 						
 						break;
 						
@@ -140,82 +187,66 @@ public class Driver {
 	
 						System.out.print("Enter your Age ");
 						Age += inp.nextInt();
-						obj.setAge(Age);
-						inp.nextLine();
+						FlightsList.get(Findex).PassengersList.get(Pindex).setAge(Age);
+						//inp.nextLine();
 						break;
 						
 					case 3:
 	
 						System.out.print("Enter your Gender : ");
 						Gender = inp.next().charAt(0);
-						obj.setGender(Gender);
+						FlightsList.get(Findex).PassengersList.get(Pindex).setGender(Gender);
 						inp.nextLine();
 						break;
 						
 					case 4:
 	
 						System.out.print("Enter your Address : ");
-						Address += inp.nextLine();
-						obj.setAddress(Address);
 						inp.nextLine();
+						Address += inp.nextLine();
+						FlightsList.get(Findex).PassengersList.get(Pindex).setAddress(Address);
+						//inp.nextLine();
 						break;
 						
+					
 					case 5:
 	
-						System.out.print("Enter your Passport Number : ");
-						Passport_Number += inp.nextLine();
-						obj.setPassportNum(Passport_Number);
+						System.out.print("Enter your Phone Number : ");
+						Phone_Number += inp.nextLong();
+						FlightsList.get(Findex).PassengersList.get(Pindex).setPhoneNum(Phone_Number);
 						inp.nextLine();
 						break;
 						
 					case 6:
 	
-						System.out.print("Enter your Phone Number : ");
-						Phone_Number += inp.nextLong();
-						obj.setPhoneNum(Phone_Number);
+						System.out.print("Enter your Email : ");
 						inp.nextLine();
+						Email += inp.nextLine();
+						FlightsList.get(Findex).PassengersList.get(Pindex).setEmail(Email);
+					//	inp.nextLine();
 						break;
 						
 					case 7:
-	
-						System.out.print("Enter your Email : ");
-						Email += inp.nextLine();
-						obj.setEmail(Email);
-						inp.nextLine();
-						break;
-						
-					case 8:
 						
 						System.out.print("Enter your Card Number : ");
 						Card_Number += inp.nextLong();
-						obj.setCardNum(Card_Number);
-						inp.nextLine();
+						FlightsList.get(Findex).PassengersList.get(Pindex).setCardNum(Card_Number);
+					//	inp.nextLine();
 						break;
 						
-					case 9:
+					
 						
-						System.out.print("Enter your CVC Code : ");
-						CVC += inp.nextInt();
-						obj.setCVC(CVC);
-						inp.nextLine();
+					case 8:
+						FlightsList.get(Findex).PassengersList.get(Pindex).displayDetails();
 						break;
-						
-					case 10:
-						
-						System.out.print("Enter your Expiry Date of the Card : ");
-						Exp_Date_Card += inp.nextLine();
-						obj.setExpDate(Exp_Date_Card);
-						inp.nextLine();
-						break;
-						
-					case 11:
-						obj.displayDetails();
-						break;
-						
+
+					
 					}
 								
-				} while(choice != 12);
+				} while(choice != 8);
 				
+				break;
+			}	
 			case 3:
 				String FNum="";
 				String PNum="";
@@ -245,13 +276,50 @@ public class Driver {
 					FlightsList.get(i).displayFlights();
 				}
 				break;
+				
+				
+				
+				
 			case 5:
+				
+				String FlNum="";
+				String PassNum="";
+				inp.nextLine();
+				System.out.print("\nPlease Enter your Flight Number\n\n");
+				FlNum+=inp.nextLine();
+				System.out.print("\nPlease Enter your Passport Number\n\n");
+				PassNum+=inp.nextLine();
+				boolean flag1=false;
+				for (int i=0;i<FlightsList.size();i++)
+				{
+					if(FlightsList.get(i).getFlightNumber().equals(FlNum))
+					{
+						
+						FlightsList.get(i).printTicket(PassNum);
+						flag1=true;
+						
+					}
+					
+				}
+				if(!flag1)
+				{
+					
+					System.out.print("\nRECORD NOT FOUND\n\n");
+				}
+				
+				break;
+				
+				
+				
+				
+				
+			case 6:
 				exit(0);
 			
 			
 			}
 		
-		} while(choice !=5);
+		} while(choice !=6);
 	
 	
 	}

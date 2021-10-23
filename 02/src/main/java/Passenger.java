@@ -182,8 +182,6 @@ public class Passenger {
 		System.out.print("\nPHONE NUMBER:                             "+Phone_Number);
 		System.out.print("\nEMAIL:                                    "+Email);
 		System.out.print("\nCARD NUMBER:                              "+Card_Number);
-		System.out.print("\nCVC:                                      "+CVC);
-		System.out.print("\nCARD EXPIRY DATE:                         "+Exp_Date_Card);
 		System.out.print("\nSEAT NUM:                                 "+SeatNum);
 		System.out.print("\n\n_______________________________________________________________________________________________\n\n\n");
 		
