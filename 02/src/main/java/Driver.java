@@ -351,6 +351,13 @@ public class Driver {
 		 System.out.print(	"\nEnter your Age : ");
 		 Age += inp2.nextInt();
 		 
+		 while(Age<18 || Age>120)
+		 {
+			 System.out.print("\n Invalid Age, You need to 18 or above to Book a Flight\n\n");
+			 Age+=inp2.nextInt();
+		 }
+		 
+		 
 		 inp2.nextLine();
 		 
 		 System.out.print(	"\nEnter your Gender : ");

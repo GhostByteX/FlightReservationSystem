@@ -56,6 +56,7 @@ public class Passenger {
 	
 	public void setName(String n)
 	{
+		
 		this.Name=n;
 	}
 	
