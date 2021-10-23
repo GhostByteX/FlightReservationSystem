@@ -1,10 +1,23 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Driver {
 
 	public static void main(String args[]) {
 		
-		Passenger obj = new Passenger();
+		LinkedList<Flight> FlightsList=new LinkedList<Flight>();
+		int fare[]= {350,400,500};
+		Flight obj2=new Flight("FA123","Lahore","NewYork",23,450,"12/12/2021","23:45:00",fare,"Emirates","Boeing777");
+		FlightsList.add(obj2);
+		obj2=new Flight("FA128","Lisbon","Amsterdam",21,400,"12/12/2021","23:45:00",fare,"Emirates","Boeing777");
+		FlightsList.add(obj2);
+		fare[0]=275;
+		fare[1]=325;
+		fare[2]=399;
+		obj2=new Flight("FA129","Lisbon","Amsterdam",23,440,"12/22/2021","01:45:00",fare,"Etihad","Boeing742");
+		FlightsList.add(obj2);
+		
+		Passenger obj=new Passenger();
 		Scanner inp = new Scanner(System.in);
 		int choice;		
 
@@ -15,8 +28,8 @@ public class Driver {
 						+	"\n1) Book your flight."
 						+	"\n2) Edit your flight."
 						+	"\n3) Cancel your flight."
-						+	"\n4) View the price list."
-						+	"\n5) Exit from the system.\n"
+						+	"\n4) Display All Flights."
+						+   "\n5) Exit.\n\n"
 				
 				
 						);
@@ -28,7 +41,51 @@ public class Driver {
 			
 			case 1:
 			
+				String Orig="";
+				String Dest="";
+				String Type="";
 				obj=userDetails();
+				inp.nextLine();
+				System.out.print("\nEnter your Origin\n\n");
+				Orig+=inp.nextLine();
+				//inp.nextLine();
+				System.out.print("\nEnter your Destination\n\n");
+				Dest+=inp.nextLine();
+				//inp.nextLine();
+				System.out.print("\nEnter the Type of Class you want to Travel in e.g Economy,Business,First Class\n\n");
+				Type+=inp.nextLine();
+				//inp.nextLine();
+				String FlightNum="";
+				for (int i=0;i<FlightsList.size();i++)
+				{
+					
+					
+					if(FlightsList.get(i).getOrigin().equals(Orig) && FlightsList.get(i).getDestination().equals(Dest))
+					{
+						
+						FlightsList.get(i).displayFlights();
+						
+					}
+					
+						
+					
+					else
+						System.out.print("\n NO FLIGHTS AVAILABLE\n\n");
+				}
+				
+				System.out.print("\nPlease Enter the Flight Number of the Flight You want to choose based on the Fares\n\n");
+				FlightNum+=inp.nextLine();
+				
+				for (int i=0;i<FlightsList.size();i++)
+				{
+					if(FlightsList.get(i).getFlightNumber().equals(FlightNum))
+					{
+						FlightsList.get(i).BookTicket(obj, Type);
+						FlightsList.get(i).printTicket(obj.getPassportNum());
+					}
+				}
+				
+				
 				break;
 			
 			case 2:
@@ -160,16 +217,41 @@ public class Driver {
 				} while(choice != 12);
 				
 			case 3:
+				String FNum="";
+				String PNum="";
+				inp.nextLine();
+				System.out.print("\nPlease Enter your Flight Number\n\n");
+				FNum+=inp.nextLine();
+				System.out.print("\nPlease Enter your Passport Number\n\n");
+				PNum+=inp.nextLine();
 				
+				for (int i=0;i<FlightsList.size();i++)
+				{
+					if(FlightsList.get(i).getFlightNumber().equals(FNum))
+					{
+						FlightsList.get(i).CancelFlight(PNum);
+					}
+				}
+				
+				break;
+				
+				
+			
 				
 			case 4:
+				
+				for (int i=0;i<FlightsList.size();i++)
+				{
+					FlightsList.get(i).displayFlights();
+				}
+				break;
 			case 5:
 				exit(0);
 			
 			
 			}
 		
-		} while(choice != 5);
+		} while(choice !=5);
 	
 	
 	}
@@ -212,7 +294,7 @@ public class Driver {
 		 System.out.print(	"\nEnter your Address : ");
 		 Address += inp2.nextLine();
 		
-		 System.out.print(	"\nEnter your Passpoer Number : ");
+		 System.out.print(	"\nEnter your Passport Number : ");
 		 Passport_Number += inp2.nextLine();
 		
 		 System.out.print(	"\nEnter your Phone Number : ");
@@ -240,8 +322,12 @@ public class Driver {
 		
 	
 		Passenger obj = new Passenger(Name,Age,Gender,Address,Passport_Number,Phone_Number,Email,Card_Number,CVC,Exp_Date_Card);
-		obj.displayDetails();
 		return obj;
 	}
 
+	
+	
+	
+	
+	
 }

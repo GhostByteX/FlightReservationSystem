@@ -13,7 +13,8 @@ public class Passenger {
 	private long Card_Number;
 	private int CVC;
 	private String Exp_Date_Card;
-	
+	private int SeatNum;
+	private String Type;
 	
 	public Passenger() 
 	{
@@ -27,6 +28,8 @@ public class Passenger {
 		Card_Number=0;
 		CVC=0;
 		Exp_Date_Card="";
+		SeatNum=0;
+		Type="";
 	}
 
 	public Passenger(String name,int age,char G,String Addr, String passportNumber, long PNum, String email, long CardNum, int cvc, String expDate) {
@@ -41,7 +44,8 @@ public class Passenger {
 		this.Card_Number=CardNum;
 		this.CVC=cvc;
 		this.Exp_Date_Card=expDate;
-		
+		this.SeatNum=0;
+		this.Type="";
 	}
 
 	public String getName()
@@ -145,19 +149,42 @@ public class Passenger {
 		this.Exp_Date_Card=expDate;
 	}
 	
+	public int getSeatNum()
+	{
+		return this.SeatNum;
+	}
+	
+	public void setSeatNum(int S)
+	{
+		this.SeatNum=S;
+	}
+	
+	public String getType()
+	{
+		return this.Type;
+	}
+	
+	
+	public void setType(String T)
+	{
+		this.Type=T;
+	}
+	
+	
 	public void displayDetails()
 	{
 		System.out.print("\n______________________________________________________________________________________________\n\n				PASSENGER DETAILS\n\n\n");
 		System.out.print("NAME:                                     "+Name);
-		System.out.print("\n\nAGE:                                      "+Age);
-		System.out.print("\n\nGENDER:                                   "+Gender);
-		System.out.print("\n\nADDRESS:                                  "+Address);
-		System.out.print("\n\nPASSPORT NUMBER:                          "+Passport_Number);
-		System.out.print("\n\nPHONE NUMBER:                             "+Phone_Number);
-		System.out.print("\n\nEMAIL:                                    "+Email);
-		System.out.print("\n\nCARD NUMBER:                              "+Card_Number);
-		System.out.print("\n\nCVC:                                      "+CVC);
-		System.out.print("\n\nCARD EXPIRY DATE:                         "+Exp_Date_Card);
+		System.out.print("\nAGE:                                      "+Age);
+		System.out.print("\nGENDER:                                   "+Gender);
+		System.out.print("\nADDRESS:                                  "+Address);
+		System.out.print("\nPASSPORT NUMBER:                          "+Passport_Number);
+		System.out.print("\nPHONE NUMBER:                             "+Phone_Number);
+		System.out.print("\nEMAIL:                                    "+Email);
+		System.out.print("\nCARD NUMBER:                              "+Card_Number);
+		System.out.print("\nCVC:                                      "+CVC);
+		System.out.print("\nCARD EXPIRY DATE:                         "+Exp_Date_Card);
+		System.out.print("\nSEAT NUM:                                 "+SeatNum);
 		System.out.print("\n\n_______________________________________________________________________________________________\n\n\n");
 		
 		
